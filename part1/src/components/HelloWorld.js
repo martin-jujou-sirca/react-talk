@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 
 class HelloWorld extends Component {
 
+  static propTypes = {
+    name: React.PropTypes.string,
+  };
+
+  static defaultProps = {
+    name: '',
+  };
+
   constructor() {
     super();
     this.state = {
@@ -28,10 +36,7 @@ class HelloWorld extends Component {
     console.log('Next Props: ', nextProps);
     console.log('Next State: ', nextState);
 
-    if (nextState.counter % 2 === 0) {
-      return true;
-    }
-    return false;
+    return nextState.counter % 2;
   }
 
   increment() {
@@ -44,9 +49,9 @@ class HelloWorld extends Component {
     console.log('Render');
     return (
       <div>
-        <p>
-          Hello World: {this.state.counter}
-        </p>
+        <h1>
+          Hello {this.props.name} World: {this.state.counter}
+        </h1>
         <input type="button" onClick={this.increment} defaultValue="Increment" />
       </div>
     );
