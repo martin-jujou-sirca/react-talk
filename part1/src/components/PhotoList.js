@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PhotoCell from './PhotoCell.js';
 
 class PhotoList extends Component {
 
@@ -11,20 +12,14 @@ class PhotoList extends Component {
   }
 
   render() {
-    const styles = {
-      image: {
-        width: '100%',
-        display: 'block',
-        marginBottom: 4,
-        marginTop: 4,
-      },
-    };
-
     return (
       <div>
+        <p>
+          {this.props.photos.length} Results Found.
+        </p>
         {this.props.photos.map((result) => {
           return (
-            <img src={result.link} style={styles.image} />
+            <PhotoCell src={result.link} key={result.id} title={result.title} />
           );
         })}
       </div>

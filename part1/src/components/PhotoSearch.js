@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PhotoList from './PhotoList.js';
 import request from 'superagent';
+import Spinner from './Spinner.js';
+import DebounceInput from 'react-debounce-input';
 
 
 // ID: 727f5efe1caf7fe
@@ -20,6 +22,10 @@ class PhotoSearch extends Component {
   }
 
   search(event) {
+    if (event.target.value === this.state.search) {
+      return;
+    }
+
     this.setState({
       search: event.target.value,
       loading: true,
@@ -27,8 +33,9 @@ class PhotoSearch extends Component {
 
     request
       .get('https://api.imgur.com/3/gallery/search')
-      .query({ q_all: this.state.search })
-      .query({q_size_px: 'med'})
+      .query({ q_all: event.target.value })
+      .query({q_size_px: 'small'})
+      .query({q_type: 'png'})
       .set('Authorization', 'Client-ID 727f5efe1caf7fe')
       .end((err, res) => {
         if (err || !res.ok) {
@@ -39,12 +46,8 @@ class PhotoSearch extends Component {
             loading: false,
           });
         } else {
-          // console.log('Res: ', res.body.data);
-          const results = res.body.data.map((result) => {
-            return {
-              title: result.title,
-              link: result.link,
-            };
+          const results = res.body.data.filter((result) => {
+            return !result.is_album;
           });
 
           this.setState({
@@ -74,11 +77,25 @@ class PhotoSearch extends Component {
       },
     };
 
+    let loading = '';
+
+    if (this.state.loading) {
+      loading = (
+        <Spinner />
+      );
+    }
+
     return (
       <div style={styles.container}>
         <h1>Photo Search</h1>
-        <input type="text" value={this.state.search} onChange={this.search} style={styles.input} />
+        <DebounceInput
+          value={this.state.search}
+          style={styles.input}
+          minLength={3}
+          debounceTimeout={600}
+          onChange={this.search} />
         <PhotoList photos={this.state.results} />
+        {loading}
       </div>
     );
   }

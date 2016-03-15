@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+// console logs in here are for demo purposes
 class HelloWorld extends Component {
 
   static propTypes = {
