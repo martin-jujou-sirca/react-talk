@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import PhotoList from './PhotoList.js';
+import PhotoList from './PhotoList';
 import request from 'superagent';
-import Spinner from './Spinner.js';
-import DebounceInput from 'react-debounce-input';
+import Spinner from './Spinner';
 
 
 // ID: 727f5efe1caf7fe
@@ -16,24 +15,29 @@ class PhotoSearch extends Component {
       search: '',
       results: [],
       loading: false,
+      searched: false,
     };
 
     this.search = this.search.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   search(event) {
-    if (event.target.value === this.state.search) {
-      return;
-    }
-
     this.setState({
       search: event.target.value,
+    });
+  }
+
+  submit(event) {
+    event.preventDefault();
+
+    this.setState({
       loading: true,
     });
 
     request
       .get('https://api.imgur.com/3/gallery/search')
-      .query({ q_all: event.target.value })
+      .query({ q_all: this.state.search })
       .query({q_size_px: 'small'})
       .query({q_type: 'png'})
       .set('Authorization', 'Client-ID 727f5efe1caf7fe')
@@ -53,6 +57,7 @@ class PhotoSearch extends Component {
           this.setState({
             results: results,
             loading: false,
+            searched: true,
           });
         }
       });
@@ -67,13 +72,22 @@ class PhotoSearch extends Component {
         marginRight: 'auto',
       },
       input: {
-        display: 'block',
+        display: 'inline-block',
         margin: 0,
-        width: '100%',
+        width: '80%',
         height: 34,
         fontFamily: 'sans-serif',
         fontSize: 18,
         outline: 'none',
+        boxSizing: 'border-box',
+      },
+      button: {
+        display: 'inline-block',
+        width: '20%',
+        boxSizing: 'border-box',
+        height: 34,
+        border: 'none',
+        verticalAlign: 'top',
       },
     };
 
@@ -88,13 +102,14 @@ class PhotoSearch extends Component {
     return (
       <div style={styles.container}>
         <h1>Photo Search</h1>
-        <DebounceInput
-          value={this.state.search}
-          style={styles.input}
-          minLength={3}
-          debounceTimeout={600}
-          onChange={this.search} />
-        <PhotoList photos={this.state.results} />
+        <form onSubmit={this.submit}>
+          <input
+            value={this.state.search}
+            style={styles.input}
+            onChange={this.search} />
+          <input type="button" value="Submit" style={styles.button} />
+        </form>
+        <PhotoList photos={this.state.results} showSummary={this.state.searched} />
         {loading}
       </div>
     );

@@ -5,6 +5,11 @@ class PhotoList extends Component {
 
   static propTypes = {
     photos: React.PropTypes.array.isRequired,
+    showSummary: React.PropTypes.bool,
+  };
+
+  static defaultProps = {
+    showSummary: false,
   };
 
   constructor() {
@@ -12,11 +17,14 @@ class PhotoList extends Component {
   }
 
   render() {
+    let summary = '';
+    if (this.props.showSummary) {
+      summary = (<p>{this.props.photos.length} Results Found.</p>);
+    }
+
     return (
       <div>
-        <p>
-          {this.props.photos.length} Results Found.
-        </p>
+        {summary}
         {this.props.photos.map((result) => {
           return (
             <PhotoCell src={result.link} key={result.id} title={result.title} />
