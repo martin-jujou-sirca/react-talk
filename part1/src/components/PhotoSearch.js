@@ -88,6 +88,9 @@ class PhotoSearch extends Component {
         height: 34,
         border: 'none',
         verticalAlign: 'top',
+        backgroundColor: 'dodgerblue',
+        fontWeight: 'bold',
+        color: 'white',
       },
     };
 

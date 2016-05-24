@@ -822,8 +822,8 @@ html:-moz-full-screen-ancestor {
 .reveal .slide-background {
   display: none;
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 200px;
+  height: 200px;
   opacity: 0;
   visibility: hidden;
   background-color: transparent;
