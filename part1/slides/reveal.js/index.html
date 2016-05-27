@@ -42,15 +42,94 @@
 			<div class="slides">
 				<section data-background="images/React.js_logo.svg.png">
 					<h1>React</h1>
-					<h3>The HTML Presentation Framework</h3>
-				</section>
-
-				<section>
-					<h2>Hello There</h2>
 					<p>
-						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
+						<small>A beginners guide by <a href="http://twitter.com/mjujou">@mjujou</a></small>
 					</p>
 				</section>
+
+				<section data-background="images/React.js_logo.svg.png" id="fragments1">
+					<h2>What is React?</h2>
+					<ul>
+						<li class="fragment">A Javascript Library for creating user interfaces</li>
+						<li class="fragment">Only a "View" Library - makes no assumptions about the rest of your tech stack. Makes it easier to integrate with existing projects.</li>
+						<li class="fragment">Used by Facebook, Airbnb, Apple, Uber and many more</li>
+					</ul>
+				</section>
+
+				<section data-background="images/react_plugin.png" class="fullscreen">
+				</section>
+
+				<section data-background="images/React.js_logo.svg.png" id="fragments2">
+					<h2>Advantages</h2>
+					<ul>
+						<li class="fragment">Virtual DOM: abstracts Document Object Model (DOM) for better performance</li>
+						<li class="fragment">Component driven development (easier and more maintainable development)</li>
+						<li class="fragment">Server side rendering via Node.js (performance and SEO benefits)</li>
+					</ul>
+				</section>
+
+				<section data-background="images/React.js_logo.svg.png">
+					<h3>Virtual DOM</h3>
+					<section data-markdown>
+						<script type="text/template">
+							```
+							  renderA: <div />
+								renderB: <span />
+								=> [removeNode <div />], [insertNode <span />]
+							```
+						</script>
+					</section>
+					<p>
+					If the node type is different, React will treat them as two different subtrees and throw away the first one and build and insert the second one
+					</p>
+				</section>
+
+				<section data-background="images/React.js_logo.svg.png">
+					<h3>Virtual DOM</h3>
+					<section data-markdown>
+						<script type="text/template">
+							```
+							  renderA: <div id="before" />
+								renderB: <div id="after" />
+								=> [replaceAttribute id "after"]
+							```
+						</script>
+					</section>
+					<p>
+					When comparing two DOM nodes, we look at the attributes of both and can decide which of them changed in linear time.
+					</p>
+				</section>
+
+				<section data-background="images/React.js_logo.svg.png">
+					<h3>Virtual DOM</h3>
+					<section data-markdown>
+						<script type="text/template">
+							```
+							  renderA: <div><span>first</span></div>
+								renderB: <div><span>second</span><span>first</span></div>
+								=> [replaceAttribute textContent 'second'], [insertNode <span>first</span>]
+							```
+						</script>
+					</section>
+					<p>
+					Problematic Case
+					</p>
+				</section>
+
+
+				<section data-background="images/React.js_logo.svg.png" id="fragments3">
+					<h3>Components</h3>
+					<p>
+						React components implement a render method which takes input data (props) and returns what to display in a XML / HTML like syntax called JSX
+					</p>
+					<p>
+
+					</p>
+				</section>
+
+
+
+
 
 				<!-- Example of nested vertical slides -->
 				<section>

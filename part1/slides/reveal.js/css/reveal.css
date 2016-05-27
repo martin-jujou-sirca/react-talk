@@ -1329,3 +1329,9 @@ html:-moz-full-screen-ancestor {
 
 .zoomed .reveal .roll span:after {
   visibility: hidden; }
+
+
+.fullscreen {
+  width: 100% !important;
+  height: 100% !important;
+}
