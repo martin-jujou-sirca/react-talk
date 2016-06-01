@@ -9,19 +9,19 @@ const ReactDOM = require('react-dom');
 
 
 // render a react component (component lifecycle / props/ state)
-// import HelloWorld from './components/HelloWorld.js';
+import HelloWorld from './components/HelloWorld.js';
 
-// ReactDOM.render(
-//   <HelloWorld name="martin" />,
-//   document.getElementById('main')
-// );
+ReactDOM.render(
+  <HelloWorld name="martin" />,
+  document.getElementById('main')
+);
 
 
 
 // creating modular / reusable components
-import PhotoSearch from './components/PhotoSearch.js';
+// import PhotoSearch from './components/PhotoSearch.js';
 
-ReactDOM.render(
-  <PhotoSearch />,
-  document.getElementById('main')
-);
+// ReactDOM.render(
+//   <PhotoSearch />,
+//   document.getElementById('main')
+// );

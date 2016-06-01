@@ -22,22 +22,33 @@ class HelloWorld extends Component {
 
 
   componentWillMount() {
-    console.log('Will Mount');
+    console.log('componentWillMount');
   }
 
   componentDidMount() {
-    console.log('Did Mount');
+    console.log('componentDidMount');
   }
 
   componentWillReceiveProps() {
-    console.log('Will Receive Props');
+    console.log('componentWillReceiveProps');
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    console.log('shouldComponentUpdate');
     console.log('Next Props: ', nextProps);
     console.log('Next State: ', nextState);
 
     return nextState.counter % 2;
+  }
+
+  componentWillUpdate() {
+    console.log('componentWillUpdate');
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate');
+    console.log('Prev Props: ', prevProps);
+    console.log('Prev State: ', prevState);
   }
 
   increment() {
